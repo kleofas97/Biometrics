@@ -89,9 +89,9 @@ for img in train_images:
     train_hog.append(hog_desc)
 svm_model = LinearSVC(random_state=42, tol=1e-5)
 svm_model.fit(train_hog, train_labels)
-#predicting
+# predicting
 Pos, Neg = 0, 0
-for image,label in testing:
+for image, label in testing:
     (hog_desc, hog_image) = feature.hog(image, orientations=9, pixels_per_cell=(8, 8),
                                         cells_per_block=(2, 2), transform_sqrt=True,
                                         block_norm='L2-Hys', visualize=True)
@@ -102,3 +102,10 @@ for image,label in testing:
     else:
         Neg += 1
 print("For HOG+SVM test set. Positive: {}, Negative: {}".format(Pos, Neg))
+
+#################
+# output
+# For EigenFaceRecognizer, test set. Positive: 38, Negative: 16
+# For FisherFaceRecognizer, test set. Positive: 45, Negative: 9
+# For LBPHFaceRecognizer, test set. Positive: 41, Negative: 13
+# For HOG+SVM test set. Positive: 45, Negative: 9
