@@ -8,7 +8,6 @@ for_randomness = [1,2,3,4]
 filename_list = [f for f in os.listdir('caltech') if os.path.isfile(os.path.join('caltech', f))]
 df = pd.read_csv("caltech/caltech_labels.csv")
 mat = scipy.io.loadmat('caltech/ImageData.mat')
-# get indexes only of images that appears more or equal than 20 times
 df = df[df['1'].isin(df['1'].value_counts()[df['1'].value_counts() >= 20].index)]
 train_images,train_label,test_images,test_label = [],[],[],[]
 idx_list = df.index.tolist()
