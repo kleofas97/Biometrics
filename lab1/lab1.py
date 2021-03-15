@@ -7,10 +7,11 @@ import numpy as np
 from sklearn.svm import LinearSVC
 from skimage import feature
 
-for_randomness = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-filename_list = [f for f in os.listdir('caltech') if os.path.isfile(os.path.join('caltech', f))]
-df = pd.read_csv("caltech/caltech_labels.csv")
-mat = scipy.io.loadmat('caltech/ImageData.mat')
+for_randomness = [1, 2, 3, 4]
+filename_list = [f for f in os.listdir('../lab2/caltech') if os.path.isfile(os.path.join(
+    '../lab2/caltech', f))]
+df = pd.read_csv("../lab2/caltech/caltech_labels.csv")
+mat = scipy.io.loadmat('../lab2/caltech/ImageData.mat')
 df = df[df['1'].isin(df['1'].value_counts()[df['1'].value_counts() >= 20].index)]
 train_images, train_labels, test_images, test_labels = [], [], [], []
 Pos, Neg = 0, 0
@@ -19,7 +20,7 @@ for file in filename_list:
     if file[0] == "i":
         img_number = int(file[-7:-4])
         if img_number in idx_list:
-            img = cv2.imread(os.path.join("caltech/", file))
+            img = cv2.imread(os.path.join("../lab2/caltech/", file))
             gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
             y = int(mat['SubDir_Data'][0][img_number - 1])
             x = int(mat['SubDir_Data'][1][img_number - 1])
